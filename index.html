@@ -1,0 +1,104 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script
+            src="http://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://appsta.paydock.com/v1/widget.umd.js" ></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+    <div class="text-center col-md-6 col-md-offset-3">
+        <img src="https://i.ytimg.com/vi/FhZrU6g9seg/maxresdefault.jpg" class="img-responsive" alt="Cinque Terre">
+    </div>
+</div>
+<h2 class="text-center">Donate</h2>
+<div class="row prices-list">
+    <div class="col-md-3 col-xs-12 col-md-offset-1 price-row">
+        <a href="#" class="thumbnail price-item-link">
+            <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                 data-holder-rendered="true">
+            <strong>5$</strong>
+        </a>
+    </div>
+    <div class="col-md-3 col-xs-12 price-row">
+        <a href="#" class="thumbnail price-item-link">
+            <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                 data-holder-rendered="true">
+            <strong>10$</strong>
+        </a>
+    </div>
+    <div class="col-md-3 col-xs-12 price-row">
+        <a href="#" class="thumbnail price-item-link">
+            <img alt="100%x180" class="price-item"
+                 src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                 data-holder-rendered="true">
+            <strong>15$</strong>
+        </a>
+    </div>
+</div>
+<h2 class="text-center">Contact form</h2>
+<div class="row">
+    <form class="contact-form">
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email">
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="2" id="comment"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-md-5 col-md-offset-3">
+        <h2 class="text-center">Payment details</h2>
+        <ul class="nav nav-tabs text-center">
+            <li class="active"><a data-toggle="tab" href="#tab1">Vault</a></li>
+            <li><a data-toggle="tab" href="#tab2">Credit card</a></li>
+            <li><a data-toggle="tab" href="#tab3" data-target="tab2">Direct debit</a></li>
+            <li>
+                <div id="ch_button" class="text-center" style="margin-top: 30px"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-pill-paypal-26px.png" alt="PayPal"></div>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane fade in active">
+                <input type="hidden" name="payment_source">
+                <div id="ps_widget"></div>
+            </div>
+            <div id="tab2" class="tab-pane fade">
+                <div id="multi_widget"></div>
+                <input type="hidden" name="one_time_token">
+            </div>
+            <div id="tab3" class="tab-pane fade">
+            </div>
+        </div>
+        <button type="submit" class="submit-button text-center btn btn-primary btn-lg btn-block" style="margin-bottom: 50px">Submit Form
+        </button>
+    </div>
+</div>
+</div>
+</body>
+<footer>
+    <script src="main.js" ></script>
+</footer>
+</html>
