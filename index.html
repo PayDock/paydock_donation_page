@@ -1,104 +1,367 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script
-            src="http://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <script src="https://appsta.paydock.com/v1/widget.umd.js" ></script>
+    <!--- Vendors (bootstrap, font-awesome)--->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--- Internal style --->
     <link href="main.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="container">
-<div class="row">
-    <div class="text-center col-md-6 col-md-offset-3">
-        <img src="https://i.ytimg.com/vi/FhZrU6g9seg/maxresdefault.jpg" class="img-responsive" alt="Cinque Terre">
-    </div>
-</div>
-<h2 class="text-center">Donate</h2>
-<div class="row prices-list">
-    <div class="col-md-3 col-xs-12 col-md-offset-1 price-row">
-        <a href="#" class="thumbnail price-item-link">
-            <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
-                 data-holder-rendered="true">
-            <strong>5$</strong>
-        </a>
-    </div>
-    <div class="col-md-3 col-xs-12 price-row">
-        <a href="#" class="thumbnail price-item-link">
-            <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
-                 data-holder-rendered="true">
-            <strong>10$</strong>
-        </a>
-    </div>
-    <div class="col-md-3 col-xs-12 price-row">
-        <a href="#" class="thumbnail price-item-link">
-            <img alt="100%x180" class="price-item"
-                 src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
-                 data-holder-rendered="true">
-            <strong>15$</strong>
-        </a>
-    </div>
-</div>
-<h2 class="text-center">Contact form</h2>
-<div class="row">
-    <form class="contact-form">
-        <div class="col-md-5 col-md-offset-1">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email">
-            </div>
+    <div class="row">
+        <div class="text-center col-md-6 col-md-offset-3">
+            <img src="https://i.ytimg.com/vi/FhZrU6g9seg/maxresdefault.jpg" class="img-responsive" alt="Cinque Terre">
         </div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control" rows="2" id="comment"></textarea>
-            </div>
+    </div>
+    <h2 class="text-center">Donate</h2>
+    <div class="row prices-list">
+        <div class="col-md-3 col-xs-12 col-md-offset-1 price-row">
+            <a href="#" class="thumbnail" price-item="">
+                <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                     data-holder-rendered="true">
+                <strong>5$</strong>
+            </a>
         </div>
-    </form>
-</div>
-<div class="row">
-    <div class="col-md-5 col-md-offset-3">
-        <h2 class="text-center">Payment details</h2>
-        <ul class="nav nav-tabs text-center">
-            <li class="active"><a data-toggle="tab" href="#tab1">Vault</a></li>
-            <li><a data-toggle="tab" href="#tab2">Credit card</a></li>
-            <li><a data-toggle="tab" href="#tab3" data-target="tab2">Direct debit</a></li>
-            <li>
-                <div id="ch_button" class="text-center" style="margin-top: 30px"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-pill-paypal-26px.png" alt="PayPal"></div>
-            </li>
-        </ul>
+        <div class="col-md-3 col-xs-12 price-row">
+            <a href="#" class="thumbnail" price-item="">
+                <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                     data-holder-rendered="true">
+                <strong>10$</strong>
+            </a>
+        </div>
+        <div class="col-md-3 col-xs-12 price-row">
+            <a href="#" class="thumbnail" price-item="">
+                <img alt="100%x180" class="price-item"
+                     src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                     data-holder-rendered="true">
+                <strong>15$</strong>
+            </a>
+        </div>
+    </div>
+    <h2 class="text-center">Contact form</h2>
+    <div class="row">
+        <form class="contact-form">
+            <div class="col-md-5 col-md-offset-1">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="2" id="comment"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <h2 class="text-center">Payment details</h2>
 
-        <div class="tab-content">
-            <div id="tab1" class="tab-pane fade in active">
-                <input type="hidden" name="payment_source">
-                <div id="ps_widget"></div>
+            <!--- tabs for navigation between widget--->
+            <ul class="nav nav-tabs text-center">
+                <li class="active">
+                    <a data-toggle="tab" rel="vault" href="#tab-vault">Vault</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" rel="card" href="#tab-form-widget">Credit card</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" rel="bank_account" href="#tab-form-widget">Direct debit</a></li>
+
+                <li><!--- CHECKOUT_BUTTON --->
+                    <div id="ch_button" class="text-center" style="margin-top: 30px"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-pill-paypal-26px.png" alt="PayPal"></div>
+                </li>
+            </ul>
+
+
+            <div class="tab-content">
+                <!--- PAYMENT SOURCE WIDGET --->
+                <div id="tab-vault" class="tab-pane fade in active">
+                    <div id="ps_widget"></div> <!--- container for list of payment sources-->
+                    <input type="hidden" name="payment_source"> <!--- input will contain a payment_source_id after select item at widget -->
+                </div>
+
+                <!--- PAYMENT FORM WIDGET --->
+                <div id="tab-form-widget" class="tab-pane fade">
+                    <div id="multi_widget"></div> <!--- container for payment form-->
+                    <input type="hidden" name="one_time_token"> <!--- input will contain a one-time-token after success finish form widget -->
+                </div>
             </div>
-            <div id="tab2" class="tab-pane fade">
-                <div id="multi_widget"></div>
-                <input type="hidden" name="one_time_token">
-            </div>
-            <div id="tab3" class="tab-pane fade">
-            </div>
+            <button type="submit" class="submit-button text-center btn btn-primary btn-lg btn-block" style="margin-bottom: 50px">
+                Submit Form
+            </button>
         </div>
-        <button type="submit" class="submit-button text-center btn btn-primary btn-lg btn-block" style="margin-bottom: 50px">Submit Form
-        </button>
     </div>
 </div>
-</div>
-</body>
 <footer>
-    <script src="main.js" ></script>
 </footer>
+
+
+<!--- Vendors (jquery, bootstrap, widget)--->
+<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://appsta.paydock.com/v1/widget.umd.js" ></script>
+
+
+<!--- CONST-->
+<script>
+    var REL = {
+        VAULT: 'vault',
+        CARD: 'card',
+        BANK_ACCOUNT: 'bank_account',
+        CHECKOUT: 'checkout',
+    };
+
+    var CARD_SCHEME = {
+        AUSBC: 'ausbc',
+        VISA: 'visa',
+        MASTERCARD: 'mastercard',
+        DINERS: 'diners',
+        JAPCB: 'japcb',
+        LASER: 'laser',
+        SOLO: 'solo',
+        DISCOVER: 'discover',
+        AMEX: 'amex',
+        UNIONPAY: 'unionpay',
+        MAESTRO: 'maestro'
+    };
+</script>
+
+
+
+<!--
+======================
+    Payment Source Widget
+======================
+-->
+<script>
+    var paymentSourcesWidget = new paydock.HtmlPaymentSourceWidget('#ps_widget', 'e664b3f83b8205dd694f943960006d73b70d1a7b', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZlcmVuY2UiOiJDdXN0b21SZWZlcmVuY2UiLCJsaW1pdCI6bnVsbCwic2tpcCI6bnVsbCwiaWF0IjoxNTAxNjYxNjA3fQ.GOznFm-U5ai1Jcb6RVJ1O16P20p4P7rne8d7O752zdw');
+    paymentSourcesWidget.setStyles({ icon_size: 'small'});
+    paymentSourcesWidget.setLimit(20);
+    paymentSourcesWidget.setRefId('test_ref_id');
+    paymentSourcesWidget.setEnv('staging');
+    paymentSourcesWidget.onSelectInsert('[name="payment_source"]', 'payment_source_id');
+    paymentSourcesWidget.load();
+
+</script>
+
+
+<!--
+======================
+    Form Widget
+======================
+-->
+<script>
+
+    // Config for card
+    var cardAccount = new paydock.Configuration('597f1691121bf502e56ae9a6', 'card');
+    cardAccount.setFormFields(['last_name']);
+
+    // Config for bank account
+    var bankAccount = new paydock.Configuration('597f1691121bf502e56ae9a6', 'bank_account');
+    bankAccount.setFormFields(['last_name', 'account_bsb']);
+
+    // init
+    var formWidget = new paydock.HtmlMultiWidget('#multi_widget', '5a453a6ee532cc3c8d40b12360254cc87a58e33c', [cardAccount, bankAccount]);
+    formWidget.setEnv('staging');
+    formWidget.setHiddenElements(['tabs', 'submit_button']);
+    formWidget.onFinishInsert('[name="one_time_token"]', 'payment_source');
+    formWidget.load();
+
+</script>
+
+
+
+<!--
+======================
+    Checkout Widget
+======================
+-->
+<script>
+
+    var button = new paydock.CheckoutButton('#ch_button', 'e664b3f83b8205dd694f943960006d73b70d1a7b', '598463cc0b19c07172b1b336');
+    button.setEnv('staging');
+    button.setBackdropDescription('Very long text');
+    button.setBackdropTitle('Checkout title');
+    button.onFinishInsert('input[name="pst"]', 'payment_source_token');
+    button.setMeta({
+        brand_name: 'Paydock',
+        reference: '15',
+        email: 'checriginoleg@gmail.com',
+        hdr_img: 'https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAy4AAAAJDFmZTk5ZjJjLTE0MWYtNDI5OS1hMmUwLWJhOTlhNzQ2MDFhZA.jpg',
+        logo_img: 'https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAy4AAAAJDFmZTk5ZjJjLTE0MWYtNDI5OS1hMmUwLWJhOTlhNzQ2MDFhZA.jpg',
+        first_name: 'receiver name',
+        last_name: 'receiver name',
+        address_line: 'receiver street',
+        address_line2: 'receiver street 2',
+        address_city: 'receiver city',
+        address_postcode: 'receiver zip',
+        hide_shipping_address: '1',
+        phone: '9379992'
+    });
+
+</script>
+
+
+
+
+<!--
+======================
+    BUTTON
+======================
+-->
+<script>
+    function updateButtonText(data) {
+        var button = $('button[type="submit"]');
+
+
+        switch (data.payment_source_type || data.type) {
+            case 'card':
+                button.html(_card(data.card_scheme,  data.card_number_last4) );
+                break;
+
+            case 'bank_account':
+            case 'bsb':
+                button.html(_bankAccount(data.account_number) );
+                break;
+
+            case 'checkout':
+                button.html(_checkout() );
+                break;
+
+            default:
+                button.html('Donate');
+                break;
+        }
+
+        function _card(cardScheme, cardNumberLast4) {
+            var template = 'Donate {card_number_last4} {icon}';
+
+            template = (cardNumberLast4)
+                ? template.replace('{card_number_last4}', '****' + cardNumberLast4)
+                : template.replace('{card_number_last4}', '');
+
+            var icon = '';
+            switch(cardScheme) {
+                case CARD_SCHEME.VISA:
+                    icon = 'fa-cc-visa';
+                    break;
+                case CARD_SCHEME.MASTERCARD:
+                    icon = 'fa-cc-mastercard';
+                    break;
+                case CARD_SCHEME.AMEX:
+                    icon = 'fa-cc-amex';
+                    break;
+                default:
+                    icon ='fa-credit-card';
+                    break;
+            }
+            return template.replace('{icon}', '<i class="fa ' + icon + '"></i>');
+        }
+
+
+        function _bankAccount(accountNumber) {
+            var template = 'Donate {account_number} {icon}';
+            template = (accountNumber)
+                ? template.replace('{account_number}', accountNumber)
+                : template.replace('{account_number}', '');
+
+            return template.replace('{icon}', '<i class="fa fa-university"></i>');
+        }
+
+        function _checkout() {
+            var template = 'Donate {account_number} {icon}';
+            return template;
+        }
+    }
+</script>
+
+
+<!--
+======================
+    Changing text of button
+======================
+-->
+<script>
+    paymentSourcesWidget.on('select', function (data) {
+        updateButtonText(data);
+    });
+    formWidget.on('metaChange', function (data) {
+        updateButtonText(data)
+    });
+    button.on('finish', function(data) {
+        updateButtonText(data)
+    });
+</script>
+
+
+
+
+<!--
+======================
+    Submit
+======================
+-->
+<script>
+    var state_rel = REL.VAULT;
+
+    $('button[type="submit"]').on( "click", function(e) {
+        e.preventDefault();
+
+        switch (state_rel) {
+            case REL.CARD:
+            case REL.BANK_ACCOUNT:
+                formWidget.trigger('submit_form');
+                break;
+        }
+
+    });
+</script>
+
+
+
+<!--
+======================
+    Changing tabs/widget/button-text
+======================
+-->
+<script>
+    var state_rel = REL.VAULT;
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        switch ($(e.target).attr("rel")) {
+            case REL.VAULT:
+                state_rel = REL.VAULT;
+                paymentSourcesWidget.reload();
+                break;
+
+            case REL.CARD:
+                state_rel = REL.CARD;
+                formWidget.trigger('tab', { tab_number: 1});
+                break;
+
+            case REL.BANK_ACCOUNT:
+                state_rel = REL.BANK_ACCOUNT;
+                formWidget.trigger('tab', { tab_number: 2});
+                break;
+            case REL.CHECKOUT:
+                state_rel = REL.CHECKOUT;
+                formWidget.trigger('tab', { tab_number: 2});
+                break;
+        }
+        updateButtonText({});
+    });
+</script>
+</body>
 </html>
