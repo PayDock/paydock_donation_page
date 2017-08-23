@@ -70,15 +70,15 @@
     </div>
     <h2 class="text-center">Contact form</h2>
     <div class="row">
-        <form class="contact-form">
+        <form class="contact-form" method="post">
             <div class="col-md-5 col-md-offset-1">
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" name="name" class="form-control" id="name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="text" class="form-control" id="email">
+                    <input type="text" name="email" class="form-control" id="email">
                 </div>
             </div>
             <div class="col-md-5">
@@ -240,7 +240,7 @@
 -->
 <script>
 
-    var button = new paydock.CheckoutButton('#ch_button', 'e664b3f83b8205dd694f943960006d73b70d1a7b', '598463cc0b19c07172b1b336');
+    var button = new paydock.CheckoutButton('#ch_button', '5a453a6ee532cc3c8d40b12360254cc87a58e33c', '598463cc0b19c07172b1b336');
     button.setEnv('staging');
     button.setBackdropDescription('Very long text');
     button.setBackdropTitle('Checkout title');
@@ -274,7 +274,6 @@
     function updateButtonText(data) {
         var button = $('button[type="submit"]');
 
-
         switch (data.payment_source_type || data.type) {
             case 'card':
                 button.html(_card(data.card_scheme,  data.card_number_last4) );
@@ -286,7 +285,7 @@
                 break;
 
             case 'checkout':
-                button.html(_checkout() );
+                button.html(_checkout(data.checkout_email) );
                 break;
 
             default:
@@ -329,9 +328,13 @@
             return template.replace('{icon}', '<i class="fa fa-university"></i>');
         }
 
-        function _checkout() { //@TODO update with checkout data
-            var template = 'Donate {account_number} {icon}';
-            return template;
+        function _checkout(email) { //@TODO update with checkout data
+            var template = 'Donate {email} {icon}';
+            template = (email)
+                ? template.replace('{email}', email)
+                : template.replace('{email}', '');
+
+            return template.replace('{icon}', '<i class="fa fa-paypal"></i>');
         }
     }
 </script>
@@ -355,7 +358,9 @@
     });
 
     button.on('finish', function(data) {
-        state.payment_source_token = data.payment_source;
+        state.payment_source_token = data.payment_source_token;
+        button.meta = data;
+        data.type = 'checkout';
         updateButtonText(data);
     });
 </script>
@@ -372,6 +377,7 @@
     $('button[type="submit"]').on( "click", function(e) {
         e.preventDefault();
         beforeSubmit();
+        submit()
     });
 
 
@@ -387,8 +393,8 @@
         });
     }
 
-    function submit() { //@TODO handel form data an submit on server
-
+    function submit() {
+        $('.contact-form').serializeArray(); //@TODO in next time send this data to backend
     }
 
 
