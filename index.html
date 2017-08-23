@@ -89,13 +89,11 @@
                 <!--- PAYMENT SOURCE WIDGET --->
                 <div id="tab-vault" class="tab-pane fade in active">
                     <div id="ps_widget"></div> <!--- container for list of payment sources-->
-                    <input type="hidden" name="payment_source"> <!--- input will contain a payment_source_id after select item at widget -->
                 </div>
 
                 <!--- PAYMENT FORM WIDGET --->
                 <div id="tab-form-widget" class="tab-pane fade">
                     <div id="multi_widget"></div> <!--- container for payment form-->
-                    <input type="hidden" name="one_time_token"> <!--- input will contain a one-time-token after success finish form widget -->
                 </div>
             </div>
             <button type="submit" class="submit-button text-center btn btn-primary btn-lg btn-block" style="margin-bottom: 50px">
@@ -104,8 +102,23 @@
         </div>
     </div>
 </div>
-<footer>
-</footer>
+
+<div class="modal fade" id="finish-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Donation successful</h4>
+            </div>
+            <div class="modal-body text-center">
+                <span class="text-success">Thanks for donation!</span>
+                <br />
+                <br />
+                <i class="fa fa-check fa-5x text-success" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--- Vendors (jquery, bootstrap, widget)--->
@@ -139,6 +152,20 @@
 </script>
 
 
+<!--- STATE-->
+<script>
+    var state = {
+        type: REL.VAULT,
+        payment_source_id: '',
+        payment_source_token: '',
+        vault_meta: {},
+        form_meta: {},
+    };
+
+
+</script>
+
+
 
 <!--
 ======================
@@ -151,7 +178,6 @@
     paymentSourcesWidget.setLimit(20);
     paymentSourcesWidget.setRefId('test_ref_id');
     paymentSourcesWidget.setEnv('staging');
-    paymentSourcesWidget.onSelectInsert('[name="payment_source"]', 'payment_source_id');
     paymentSourcesWidget.load();
 
 </script>
@@ -176,7 +202,6 @@
     var formWidget = new paydock.HtmlMultiWidget('#multi_widget', '5a453a6ee532cc3c8d40b12360254cc87a58e33c', [cardAccount, bankAccount]);
     formWidget.setEnv('staging');
     formWidget.setHiddenElements(['tabs', 'submit_button']);
-    formWidget.onFinishInsert('[name="one_time_token"]', 'payment_source');
     formWidget.load();
 
 </script>
@@ -194,7 +219,6 @@
     button.setEnv('staging');
     button.setBackdropDescription('Very long text');
     button.setBackdropTitle('Checkout title');
-    button.onFinishInsert('input[name="pst"]', 'payment_source_token');
     button.setMeta({
         brand_name: 'Paydock',
         reference: '15',
@@ -290,18 +314,24 @@
 
 <!--
 ======================
-    Changing text of button
+    Tracking data changes
 ======================
 -->
 <script>
     paymentSourcesWidget.on('select', function (data) {
-        updateButtonText(data);
+        state.payment_source_id = data.payment_source_id;
+        paymentSourcesWidget.meta = data;
+        updateButtonText(paymentSourcesWidget.meta);
     });
+
     formWidget.on('metaChange', function (data) {
-        updateButtonText(data)
+        formWidget.meta = data;
+        updateButtonText(formWidget.meta)
     });
+
     button.on('finish', function(data) {
-        updateButtonText(data)
+        state.payment_source_token = data.payment_source;
+        updateButtonText(data);
     });
 </script>
 
@@ -314,19 +344,32 @@
 ======================
 -->
 <script>
-    var state_rel = REL.VAULT;
-
     $('button[type="submit"]').on( "click", function(e) {
         e.preventDefault();
-
-        switch (state_rel) {
-            case REL.CARD:
-            case REL.BANK_ACCOUNT:
-                formWidget.trigger('submit_form');
-                break;
-        }
-
+        beforeSubmit();
     });
+
+
+    function beforeSubmit() {
+        if ([REL.CARD, REL.BANK_ACCOUNT].indexOf() === -1)
+            return afterSubmit();
+
+        formWidget.trigger('submit_form');
+        formWidget.on('finish', function (data) {
+            state.payment_source_token = data.payment_source;
+            formWidget.reload();
+            afterSubmit();
+        });
+    }
+
+    function submit() {
+
+    }
+
+
+    function afterSubmit() {
+        $('#finish-modal').modal('show')
+    }
 </script>
 
 
@@ -343,25 +386,29 @@
         switch ($(e.target).attr("rel")) {
             case REL.VAULT:
                 state_rel = REL.VAULT;
-                paymentSourcesWidget.reload();
+                console.log('m', paymentSourcesWidget.meta);
+                updateButtonText(paymentSourcesWidget.meta || {});
                 break;
 
             case REL.CARD:
                 state_rel = REL.CARD;
+                updateButtonText( (formWidget.meta && formWidget.meta.type == 'card')? formWidget.meta : {});
                 formWidget.trigger('tab', { tab_number: 1});
                 break;
 
             case REL.BANK_ACCOUNT:
                 state_rel = REL.BANK_ACCOUNT;
+                updateButtonText( (formWidget.meta && formWidget.meta.type == 'bank_account')? formWidget.meta : {});
                 formWidget.trigger('tab', { tab_number: 2});
                 break;
+
             case REL.CHECKOUT:
                 state_rel = REL.CHECKOUT;
                 formWidget.trigger('tab', { tab_number: 2});
                 break;
         }
-        updateButtonText({});
     });
 </script>
+
 </body>
 </html>
