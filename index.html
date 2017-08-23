@@ -26,6 +26,11 @@
             display: block;
             z-index: 100;
         }
+        .price-item-text {
+            position: absolute;
+            bottom: 30px;
+            pointer-events: none;
+        }
         .nav-tabs > li {
             display:inline-block;
             float:none;
@@ -50,14 +55,14 @@
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
                      data-holder-rendered="true" data-amount="5">
-                <strong style="position: absolute; bottom: 30px; z-index: 0">5$</strong>
+                <strong class="price-item-text">5$</strong>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
                      data-holder-rendered="true" data-amount="10">
-                <strong style="position: absolute; bottom: 30px; z-index: 0">10$</strong>
+                <strong class="price-item-text">10$</strong>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
@@ -65,7 +70,7 @@
                 <img class="price-item"
                      src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
                      data-holder-rendered="true" data-amount="15">
-                <strong style="position: absolute; bottom: 30px; z-index: 0">15$</strong>
+                <strong class="price-item-text">15$</strong>
             </a>
         </div>
     </div>
@@ -275,14 +280,13 @@
         var amount = $(this).data('amount') || '';
         state.amount = amount;
         switch (state_rel) {
-            case 'card':
-            case 'bank_account':
-            case 'bsb':
+            case REL.CARD:
+            case REL.BANK_ACCOUNT:
                 formWidget.meta.amount = amount;
                 updateButtonText(formWidget.meta);
                 break;
 
-            case 'checkout':
+            case REL.CHECKOUT:
                 button.meta.amount = amount;
                 updateButtonText(button.meta);
                 break;
@@ -309,16 +313,16 @@
 
         switch (data.payment_source_type || data.type) {
             case 'card':
-                button.html(_card(data.card_scheme,  data.card_number_last4, data.amount) );
+                button.html(_card(data.card_scheme,  data.card_number_last4, state.amount) );
                 break;
 
             case 'bank_account':
             case 'bsb':
-                button.html(_bankAccount(data.account_number, data.amount) );
+                button.html(_bankAccount(data.account_number, state.amount) );
                 break;
 
             case 'checkout':
-                button.html(_checkout(data.checkout_email, data.amount) );
+                button.html(_checkout(data.checkout_email, state.amount) );
                 break;
 
             default:
@@ -394,13 +398,11 @@
     paymentSourcesWidget.on('select', function (data) {
         state.payment_source_id = data.payment_source_id;
         paymentSourcesWidget.meta = data;
-        paymentSourcesWidget.meta.amount = state.amount;
         updateButtonText(paymentSourcesWidget.meta);
     });
 
     formWidget.on('metaChange', function (data) {
         formWidget.meta = data;
-        formWidget.meta.amount = state.amount;
         if(state_rel != 'vault')
             updateButtonText(formWidget.meta)
     });
@@ -408,7 +410,6 @@
     button.on('finish', function(data) {
         state.payment_source_token = data.payment_source_token;
         button.meta = data;
-        button.meta.amount = state.amount;
         data.type = 'checkout';
         updateButtonText(data);
     });
@@ -443,7 +444,7 @@
     }
 
     function submit() {
-        $('.contact-form').serializeArray(); //@TODO in next time send this data to backend
+        $('.contact-form').serializeArray(); //@TODO set to variable and add to payments data
     }
 
 
