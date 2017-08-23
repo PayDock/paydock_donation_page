@@ -157,9 +157,7 @@
     var state = {
         type: REL.VAULT,
         payment_source_id: '',
-        payment_source_token: '',
-        vault_meta: {},
-        form_meta: {},
+        payment_source_token: ''
     };
 
 
@@ -304,7 +302,7 @@
             return template.replace('{icon}', '<i class="fa fa-university"></i>');
         }
 
-        function _checkout() {
+        function _checkout() { //@TODO update with checkout data
             var template = 'Donate {account_number} {icon}';
             return template;
         }
@@ -362,7 +360,7 @@
         });
     }
 
-    function submit() {
+    function submit() { //@TODO handel form data an submit on server
 
     }
 
@@ -386,7 +384,6 @@
         switch ($(e.target).attr("rel")) {
             case REL.VAULT:
                 state_rel = REL.VAULT;
-                console.log('m', paymentSourcesWidget.meta);
                 updateButtonText(paymentSourcesWidget.meta || {});
                 break;
 
@@ -404,7 +401,6 @@
 
             case REL.CHECKOUT:
                 state_rel = REL.CHECKOUT;
-                formWidget.trigger('tab', { tab_number: 2});
                 break;
         }
     });
