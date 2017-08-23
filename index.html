@@ -48,22 +48,22 @@
         <div class="col-md-3 col-xs-12 col-md-offset-1 price-row">
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
-                     data-holder-rendered="true">
+                     data-holder-rendered="true" data-amount="5">
                 <strong>5$</strong>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
-                     data-holder-rendered="true">
+                     data-holder-rendered="true" data-amount="10">
                 <strong>10$</strong>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
             <a href="#" class="thumbnail" price-item="">
-                <img alt="100%x180" class="price-item"
+                <img class="price-item"
                      src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
-                     data-holder-rendered="true">
+                     data-holder-rendered="true" data-amount="15">
                 <strong>15$</strong>
             </a>
         </div>
@@ -184,7 +184,8 @@
     var state = {
         type: REL.VAULT,
         payment_source_id: '',
-        payment_source_token: ''
+        payment_source_token: '',
+        amount: ''
     };
 
 
@@ -262,6 +263,37 @@
 
 </script>
 
+<!--
+======================
+    AMOUNT BUTTON
+======================
+-->
+<script>
+    $( ".prices-list .price-item" ).on( "click", function(event) {
+        event.preventDefault();
+        var amount = $(this).data('amount') || '';
+        state.amount = amount;
+        switch (state_rel) {
+            case 'card':
+            case 'bank_account':
+            case 'bsb':
+                formWidget.meta.amount = amount;
+                updateButtonText(formWidget.meta);
+                break;
+
+            case 'checkout':
+                button.meta.amount = amount;
+                updateButtonText(button.meta);
+                break;
+
+            default:
+                paymentSourcesWidget.meta.amount = amount;
+                updateButtonText(paymentSourcesWidget.meta);
+                break;
+        }
+
+    });
+</script>
 
 
 
@@ -276,16 +308,16 @@
 
         switch (data.payment_source_type || data.type) {
             case 'card':
-                button.html(_card(data.card_scheme,  data.card_number_last4) );
+                button.html(_card(data.card_scheme,  data.card_number_last4, data.amount) );
                 break;
 
             case 'bank_account':
             case 'bsb':
-                button.html(_bankAccount(data.account_number) );
+                button.html(_bankAccount(data.account_number, data.amount) );
                 break;
 
             case 'checkout':
-                button.html(_checkout(data.checkout_email) );
+                button.html(_checkout(data.checkout_email, data.amount) );
                 break;
 
             default:
@@ -293,12 +325,16 @@
                 break;
         }
 
-        function _card(cardScheme, cardNumberLast4) {
-            var template = 'Donate {card_number_last4} {icon}';
+        function _card(cardScheme, cardNumberLast4, amount) {
+            var template = '{amount} Donate {card_number_last4} {icon}';
 
             template = (cardNumberLast4)
                 ? template.replace('{card_number_last4}', '****' + cardNumberLast4)
                 : template.replace('{card_number_last4}', '');
+
+            template = (amount)
+                ? template.replace('{amount}', '$' + amount)
+                : template.replace('{amount}', '');
 
             var icon = '';
             switch(cardScheme) {
@@ -319,20 +355,28 @@
         }
 
 
-        function _bankAccount(accountNumber) {
-            var template = 'Donate {account_number} {icon}';
+        function _bankAccount(accountNumber, amount) {
+            var template = '{amount} Donate {account_number} {icon}';
             template = (accountNumber)
                 ? template.replace('{account_number}', accountNumber)
                 : template.replace('{account_number}', '');
 
+            template = (amount)
+                ? template.replace('{amount}', '$' + amount)
+                : template.replace('{amount}', '');
+
             return template.replace('{icon}', '<i class="fa fa-university"></i>');
         }
 
-        function _checkout(email) { //@TODO update with checkout data
-            var template = 'Donate {email} {icon}';
+        function _checkout(email, amount) { //@TODO update with checkout data
+            var template = '{amount} Donate {email} {icon}';
             template = (email)
                 ? template.replace('{email}', email)
                 : template.replace('{email}', '');
+
+            template = (amount)
+                ? template.replace('{amount}', '$' + amount)
+                : template.replace('{amount}', '');
 
             return template.replace('{icon}', '<i class="fa fa-paypal"></i>');
         }
@@ -349,17 +393,21 @@
     paymentSourcesWidget.on('select', function (data) {
         state.payment_source_id = data.payment_source_id;
         paymentSourcesWidget.meta = data;
+        paymentSourcesWidget.meta.amount = state.amount;
         updateButtonText(paymentSourcesWidget.meta);
     });
 
     formWidget.on('metaChange', function (data) {
         formWidget.meta = data;
-        updateButtonText(formWidget.meta)
+        formWidget.meta.amount = state.amount;
+        if(state_rel != 'vault')
+            updateButtonText(formWidget.meta)
     });
 
     button.on('finish', function(data) {
         state.payment_source_token = data.payment_source_token;
         button.meta = data;
+        button.meta.amount = state.amount;
         data.type = 'checkout';
         updateButtonText(data);
     });
@@ -417,17 +465,20 @@
         switch ($(e.target).attr("rel")) {
             case REL.VAULT:
                 state_rel = REL.VAULT;
+                paymentSourcesWidget.meta.amount = state.amount;
                 updateButtonText(paymentSourcesWidget.meta || {});
                 break;
 
             case REL.CARD:
                 state_rel = REL.CARD;
+                formWidget.meta.amount = state.amount;
                 updateButtonText( (formWidget.meta && formWidget.meta.type == 'card')? formWidget.meta : {});
                 formWidget.trigger('tab', { tab_number: 1});
                 break;
 
             case REL.BANK_ACCOUNT:
                 state_rel = REL.BANK_ACCOUNT;
+                formWidget.meta.amount = state.amount;
                 updateButtonText( (formWidget.meta && formWidget.meta.type == 'bank_account')? formWidget.meta : {});
                 formWidget.trigger('tab', { tab_number: 2});
                 break;
