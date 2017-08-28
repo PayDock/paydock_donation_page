@@ -400,7 +400,7 @@
 
     formWidget.on('metaChange', function (data) {
         formWidget.meta = data;
-        if(state.type != 'vault')
+        if(state.type != REL.VAULT)
             updateButtonText(formWidget.meta)
     });
 
