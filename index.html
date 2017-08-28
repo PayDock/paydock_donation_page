@@ -408,8 +408,7 @@
         state.payment_source_token = data.payment_source_token;
         state.type = REL.CHECKOUT;
         button.meta = data;
-        data.type = REL.CHECKOUT;
-        updateButtonText(data);
+        updateButtonText(Object.assign(data, {type: REL.CHECKOUT}));
     });
 </script>
 
@@ -425,7 +424,6 @@
     $('button[type="submit"]').on( "click", function(e) {
         e.preventDefault();
         beforeSubmit();
-        submit()
     });
 
 
@@ -437,7 +435,7 @@
         formWidget.on('finish', function (data) {
             state.payment_source_token = data.payment_source;
             formWidget.reload();
-            afterSubmit();
+            submit();
         });
     }
 
@@ -446,6 +444,7 @@
         $.each($('.contact-form').serializeArray(), function() {
             state.formData[this.name] = this.value;
         });
+        afterSubmit();
     }
 
 
