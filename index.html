@@ -279,7 +279,7 @@
         event.preventDefault();
         var amount = $(this).data('amount') || '';
         state.amount = amount;
-        switch (state_rel) {
+        switch (state.type) {
             case REL.CARD:
             case REL.BANK_ACCOUNT:
                 formWidget.meta.amount = amount;
@@ -373,7 +373,7 @@
             return template.replace('{icon}', '<i class="fa fa-university"></i>');
         }
 
-        function _checkout(email, amount) { //@TODO update with checkout data
+        function _checkout(email, amount) {
             var template = '{amount} Donate {email} {icon}';
             template = (email)
                 ? template.replace('{email}', email)
@@ -403,14 +403,15 @@
 
     formWidget.on('metaChange', function (data) {
         formWidget.meta = data;
-        if(state_rel != 'vault')
+        if(state.type != 'vault')
             updateButtonText(formWidget.meta)
     });
 
     button.on('finish', function(data) {
         state.payment_source_token = data.payment_source_token;
+        state.type = REL.CHECKOUT;
         button.meta = data;
-        data.type = 'checkout';
+        data.type = REL.CHECKOUT;
         updateButtonText(data);
     });
 </script>
@@ -432,7 +433,7 @@
 
 
     function beforeSubmit() {
-        if ([REL.CARD, REL.BANK_ACCOUNT].indexOf() === -1)
+        if ([REL.CARD, REL.BANK_ACCOUNT].indexOf(state.type) === -1)
             return afterSubmit();
 
         formWidget.trigger('submit_form');
@@ -444,12 +445,16 @@
     }
 
     function submit() {
-        $('.contact-form').serializeArray(); //@TODO set to variable and add to payments data
+        state.formData = {};
+        $.each($('.contact-form').serializeArray(), function() {
+            state.formData[this.name] = this.value;
+        });
     }
 
 
     function afterSubmit() {
-        $('#finish-modal').modal('show')
+        $('#finish-modal').modal('show');
+        console.log(state); // result data
     }
 </script>
 
@@ -461,32 +466,30 @@
 ======================
 -->
 <script>
-    var state_rel = REL.VAULT;
-
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         switch ($(e.target).attr("rel")) {
             case REL.VAULT:
-                state_rel = REL.VAULT;
+                state.type = REL.VAULT;
                 paymentSourcesWidget.meta.amount = state.amount;
                 updateButtonText(paymentSourcesWidget.meta || {});
                 break;
 
             case REL.CARD:
-                state_rel = REL.CARD;
+                state.type = REL.CARD;
                 formWidget.meta.amount = state.amount;
                 updateButtonText( (formWidget.meta && formWidget.meta.type == 'card')? formWidget.meta : {});
                 formWidget.trigger('tab', { tab_number: 1});
                 break;
 
             case REL.BANK_ACCOUNT:
-                state_rel = REL.BANK_ACCOUNT;
+                state.type = REL.BANK_ACCOUNT;
                 formWidget.meta.amount = state.amount;
                 updateButtonText( (formWidget.meta && formWidget.meta.type == 'bank_account')? formWidget.meta : {});
                 formWidget.trigger('tab', { tab_number: 2});
                 break;
 
             case REL.CHECKOUT:
-                state_rel = REL.CHECKOUT;
+                state.type = REL.CHECKOUT;
                 break;
         }
     });
