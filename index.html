@@ -157,7 +157,7 @@
 <!--- Vendors (jquery, bootstrap, widget)--->
 <script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://appsta.paydock.com/v1/widget.umd.js" ></script>
+<script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
 
 
 <!--- CONST-->
@@ -205,11 +205,11 @@
 ======================
 -->
 <script>
-    var paymentSourcesWidget = new paydock.HtmlPaymentSourceWidget('#ps_widget', 'e664b3f83b8205dd694f943960006d73b70d1a7b', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZlcmVuY2UiOiJDdXN0b21SZWZlcmVuY2UiLCJsaW1pdCI6bnVsbCwic2tpcCI6bnVsbCwiaWF0IjoxNTAxNjYxNjA3fQ.GOznFm-U5ai1Jcb6RVJ1O16P20p4P7rne8d7O752zdw');
+    var paymentSourcesWidget = new paydock.HtmlPaymentSourceWidget('#ps_widget', 'c661a1f03c6a21ddf13d1ad95b10873205a47758', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZlcmVuY2UiOiJ0ZXN0X3JlZmVyZW5jZSIsImxpbWl0IjpudWxsLCJza2lwIjpudWxsLCJpYXQiOjE1MDM5MjI3NjR9.bZhwgS9SMhMjXy4Ofhh9JShaeiH2DpM4XbnPMN-Z1Bk');
     paymentSourcesWidget.setStyles({ icon_size: 'small'});
     paymentSourcesWidget.setLimit(20);
     paymentSourcesWidget.setRefId('test_ref_id');
-    paymentSourcesWidget.setEnv('staging');
+    paymentSourcesWidget.setEnv('sandbox');
     paymentSourcesWidget.load();
 
 </script>
@@ -223,16 +223,16 @@
 <script>
 
     // Config for card
-    var cardAccount = new paydock.Configuration('597f1691121bf502e56ae9a6', 'card');
+    var cardAccount = new paydock.Configuration('59a40161de3dcf10a444e872', 'card');
     cardAccount.setFormFields(['last_name']);
 
     // Config for bank account
-    var bankAccount = new paydock.Configuration('597f1691121bf502e56ae9a6', 'bank_account');
+    var bankAccount = new paydock.Configuration('59a40161de3dcf10a444e872', 'bank_account');
     bankAccount.setFormFields(['last_name', 'account_bsb']);
 
     // init
-    var formWidget = new paydock.HtmlMultiWidget('#multi_widget', '5a453a6ee532cc3c8d40b12360254cc87a58e33c', [cardAccount, bankAccount]);
-    formWidget.setEnv('staging');
+    var formWidget = new paydock.HtmlMultiWidget('#multi_widget', 'c661a1f03c6a21ddf13d1ad95b10873205a47758', [cardAccount, bankAccount]);
+    formWidget.setEnv('sandbox');
     formWidget.setHiddenElements(['tabs', 'submit_button']);
     formWidget.load();
 
@@ -247,8 +247,8 @@
 -->
 <script>
 
-    var button = new paydock.CheckoutButton('#ch_button', '5a453a6ee532cc3c8d40b12360254cc87a58e33c', '598463cc0b19c07172b1b336');
-    button.setEnv('staging');
+    var button = new paydock.CheckoutButton('#ch_button', 'c661a1f03c6a21ddf13d1ad95b10873205a47758', '59a401a8de3dcf10a444e873');
+    button.setEnv('sandbox');
     button.setBackdropDescription('Very long text');
     button.setBackdropTitle('Checkout title');
     button.setMeta({
