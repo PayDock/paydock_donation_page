@@ -282,17 +282,14 @@
         switch (state.type) {
             case REL.CARD:
             case REL.BANK_ACCOUNT:
-                formWidget.meta.amount = amount;
                 updateButtonText(formWidget.meta);
                 break;
 
             case REL.CHECKOUT:
-                button.meta.amount = amount;
                 updateButtonText(button.meta);
                 break;
 
             default:
-                paymentSourcesWidget.meta.amount = amount;
                 updateButtonText(paymentSourcesWidget.meta);
                 break;
         }
