@@ -2,7 +2,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--- Vendors (bootstrap, font-awesome)--->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!--- Styles --->
@@ -26,17 +27,22 @@
             display: block;
             z-index: 100;
         }
+
         .price-item-text {
             position: absolute;
             bottom: 30px;
             pointer-events: none;
         }
+
         .nav-tabs > li {
-            display:inline-block;
-            float:none;
+            display: inline-block;
+            float: none;
         }
+
         iframe {
-            border: 0;width: 100%;height: 400px;
+            border: 0;
+            width: 100%;
+            height: 400px;
         }
 
     </style>
@@ -53,14 +59,16 @@
     <div class="row prices-list">
         <div class="col-md-3 col-xs-12 col-md-offset-1 price-row">
             <a href="#" class="thumbnail" price-item="">
-                <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                <img class="price-item"
+                     src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
                      data-holder-rendered="true" data-amount="5">
                 <strong class="price-item-text">5$</strong>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
             <a href="#" class="thumbnail" price-item="">
-                <img class="price-item" src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                <img class="price-item"
+                     src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
                      data-holder-rendered="true" data-amount="10">
                 <strong class="price-item-text">10$</strong>
             </a>
@@ -113,7 +121,9 @@
                     <a data-toggle="tab" rel="bank_account" href="#tab-form-widget">Direct debit</a></li>
 
                 <li><!--- CHECKOUT_BUTTON --->
-                    <div id="ch_button" class="text-center" style="margin-top: 30px"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-pill-paypal-26px.png" alt="PayPal"></div>
+                    <div id="ch_button" class="text-center" style="margin-top: 30px"><img
+                            src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-pill-paypal-26px.png"
+                            alt="PayPal"></div>
                 </li>
             </ul>
 
@@ -129,7 +139,8 @@
                     <div id="multi_widget"></div> <!--- container for payment form-->
                 </div>
             </div>
-            <button type="submit" class="submit-button text-center btn btn-primary btn-lg btn-block" style="margin-bottom: 50px">
+            <button type="submit" class="submit-button text-center btn btn-primary btn-lg btn-block"
+                    style="margin-bottom: 50px">
                 Donate
             </button>
         </div>
@@ -140,13 +151,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Donation successful</h4>
             </div>
             <div class="modal-body text-center">
                 <span class="text-success">Thanks for donation!</span>
-                <br />
-                <br />
+                <br/>
+                <br/>
                 <i class="fa fa-check fa-5x text-success" aria-hidden="true"></i>
             </div>
         </div>
@@ -155,9 +167,12 @@
 
 
 <!--- Vendors (jquery, bootstrap, widget)--->
-<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
+<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="https://app-sandbox.paydock.com/v1/widget.umd.js"></script>
 
 
 <!--- CONST-->
@@ -193,10 +208,7 @@
         payment_source_token: '',
         amount: ''
     };
-
-
 </script>
-
 
 
 <!--
@@ -206,12 +218,11 @@
 -->
 <script>
     var paymentSourcesWidget = new paydock.HtmlPaymentSourceWidget('#ps_widget', 'c661a1f03c6a21ddf13d1ad95b10873205a47758', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZlcmVuY2UiOiJ0ZXN0X3JlZmVyZW5jZSIsImxpbWl0IjpudWxsLCJza2lwIjpudWxsLCJpYXQiOjE1MDM5MjI3NjR9.bZhwgS9SMhMjXy4Ofhh9JShaeiH2DpM4XbnPMN-Z1Bk');
-    paymentSourcesWidget.setStyles({ icon_size: 'small'});
+    paymentSourcesWidget.setStyles({icon_size: 'small'});
     paymentSourcesWidget.setLimit(20);
     paymentSourcesWidget.setRefId('test_ref_id');
     paymentSourcesWidget.setEnv('sandbox');
     paymentSourcesWidget.load();
-
 </script>
 
 
@@ -221,7 +232,6 @@
 ======================
 -->
 <script>
-
     // Config for card
     var cardAccount = new paydock.Configuration('59a40161de3dcf10a444e872', 'card');
     cardAccount.setFormFields(['last_name']);
@@ -235,9 +245,7 @@
     formWidget.setEnv('sandbox');
     formWidget.setHiddenElements(['tabs', 'submit_button']);
     formWidget.load();
-
 </script>
-
 
 
 <!--
@@ -246,7 +254,6 @@
 ======================
 -->
 <script>
-
     var button = new paydock.CheckoutButton('#ch_button', 'c661a1f03c6a21ddf13d1ad95b10873205a47758', '59a401a8de3dcf10a444e873');
     button.setEnv('sandbox');
     button.setBackdropDescription('Very long text');
@@ -275,7 +282,7 @@
 ======================
 -->
 <script>
-    $( ".prices-list .price-item" ).on( "click", function(event) {
+    $(".prices-list .price-item").on("click", function (event) {
         event.preventDefault();
         var amount = $(this).data('amount') || '';
         state.amount = amount;
@@ -298,7 +305,6 @@
 </script>
 
 
-
 <!--
 ======================
     BUTTON
@@ -310,16 +316,16 @@
 
         switch (data.payment_source_type || data.type) {
             case 'card':
-                button.html(_card(data.card_scheme,  data.card_number_last4, state.amount) );
+                button.html(_card(data.card_scheme, data.card_number_last4, state.amount));
                 break;
 
             case 'bank_account':
             case 'bsb':
-                button.html(_bankAccount(data.account_number, state.amount) );
+                button.html(_bankAccount(data.account_number, state.amount));
                 break;
 
             case 'checkout':
-                button.html(_checkout(data.checkout_email, state.amount) );
+                button.html(_checkout(data.checkout_email, state.amount));
                 break;
 
             default:
@@ -339,7 +345,7 @@
                 : template.replace('{amount}', '');
 
             var icon = '';
-            switch(cardScheme) {
+            switch (cardScheme) {
                 case CARD_SCHEME.VISA:
                     icon = 'fa-cc-visa';
                     break;
@@ -350,7 +356,7 @@
                     icon = 'fa-cc-amex';
                     break;
                 default:
-                    icon ='fa-credit-card';
+                    icon = 'fa-credit-card';
                     break;
             }
             return template.replace('{icon}', '<i class="fa ' + icon + '"></i>');
@@ -400,11 +406,11 @@
 
     formWidget.on('metaChange', function (data) {
         formWidget.meta = data;
-        if(state.type != REL.VAULT)
+        if (state.type != REL.VAULT)
             updateButtonText(formWidget.meta)
     });
 
-    button.on('finish', function(data) {
+    button.on('finish', function (data) {
         state.payment_source_token = data.payment_source_token;
         state.type = REL.CHECKOUT;
         button.meta = data;
@@ -413,15 +419,13 @@
 </script>
 
 
-
-
 <!--
 ======================
     Submit
 ======================
 -->
 <script>
-    $('button[type="submit"]').on( "click", function(e) {
+    $('button[type="submit"]').on("click", function (e) {
         e.preventDefault();
         beforeSubmit();
     });
@@ -441,7 +445,7 @@
 
     function submit() {
         state.formData = {};
-        $.each($('.contact-form').serializeArray(), function() {
+        $.each($('.contact-form').serializeArray(), function () {
             state.formData[this.name] = this.value;
         });
         afterSubmit();
@@ -453,7 +457,6 @@
         console.log(state); // result data
     }
 </script>
-
 
 
 <!--
@@ -473,15 +476,15 @@
             case REL.CARD:
                 state.type = REL.CARD;
                 formWidget.meta.amount = state.amount;
-                updateButtonText( (formWidget.meta && formWidget.meta.type == 'card')? formWidget.meta : {});
-                formWidget.trigger('tab', { tab_number: 1});
+                updateButtonText((formWidget.meta && formWidget.meta.type == 'card') ? formWidget.meta : {});
+                formWidget.trigger('tab', {tab_number: 1});
                 break;
 
             case REL.BANK_ACCOUNT:
                 state.type = REL.BANK_ACCOUNT;
                 formWidget.meta.amount = state.amount;
-                updateButtonText( (formWidget.meta && formWidget.meta.type == 'bank_account')? formWidget.meta : {});
-                formWidget.trigger('tab', { tab_number: 2});
+                updateButtonText((formWidget.meta && formWidget.meta.type == 'bank_account') ? formWidget.meta : {});
+                formWidget.trigger('tab', {tab_number: 2});
                 break;
 
             case REL.CHECKOUT:
