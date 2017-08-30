@@ -16,21 +16,21 @@
             margin-top: 20px;
         }
 
-        .price-item-link {
-            display: inline-block;
-            width: 70%;
+        .thumbnail {
+            border: 4px solid #ddd;
+            border-radius: 25px;
+        }
+        .thumbnail a {
+            position: absolute;
         }
 
-        .price-item {
+        .thumbnail img {
+            width: 245px;
             height: 200px;
-            width: 80%;
-            display: block;
-            z-index: 100;
+            border-radius: 20px;
         }
 
         .price-item-text {
-            position: absolute;
-            bottom: 30px;
             pointer-events: none;
         }
 
@@ -52,37 +52,41 @@
 <div class="container">
     <div class="row">
         <div class="text-center col-md-6 col-md-offset-3">
-            <img src="https://i.ytimg.com/vi/FhZrU6g9seg/maxresdefault.jpg" class="img-responsive" alt="Cinque Terre">
+            <img src="https://storage.moqups.com/repo/IjBWVQ4A9f/images/qs7u6Uv1id.png" class="img-responsive" alt="Cinque Terre">
         </div>
     </div>
-    <h2 class="text-center">Donate</h2>
+    <h2 class="text-center">Donate to save puppies</h2>
     <div class="row prices-list">
         <div class="col-md-3 col-xs-12 col-md-offset-1 price-row">
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item"
-                     src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                     src="https://storage.moqups.com/repo/IjBWVQ4A9f/images/p2JplnVBO7.png"
                      data-holder-rendered="true" data-amount="5">
                 <strong class="price-item-text">5$</strong>
+                <div><strong class="price-item-text">1 Puppy</strong></div>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item"
-                     src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                     src="https://storage.moqups.com/repo/IjBWVQ4A9f/images/UZlM2Z18CT.png"
                      data-holder-rendered="true" data-amount="10">
                 <strong class="price-item-text">10$</strong>
+                <div><strong class="price-item-text">2 Puppies</strong></div>
             </a>
         </div>
         <div class="col-md-3 col-xs-12 price-row">
             <a href="#" class="thumbnail" price-item="">
                 <img class="price-item"
-                     src="https://pbs.twimg.com/profile_images/507251035929190400/BDUL3Uzt_400x400.png"
+                     src="https://storage.moqups.com/repo/IjBWVQ4A9f/images/9glgtFNcfE.png"
                      data-holder-rendered="true" data-amount="15">
                 <strong class="price-item-text">15$</strong>
+                <div><strong class="price-item-text">3 Puppies</strong></div>
             </a>
         </div>
     </div>
     <h2 class="text-center">Contact form</h2>
+    <h3 class="text-center">So we can send you a receipt</h3>
     <div class="row">
         <form class="contact-form" method="post">
             <div class="col-md-5 col-md-offset-1">
@@ -97,7 +101,7 @@
             </div>
             <div class="col-md-5">
                 <div class="form-group">
-                    <label for="comment">Comment:</label>
+                    <label for="comment">Message:</label>
                     <textarea class="form-control" rows="2" id="comment"></textarea>
                 </div>
             </div>
@@ -121,7 +125,7 @@
                     <a data-toggle="tab" rel="bank_account" href="#tab-form-widget">Direct debit</a></li>
 
                 <li><!--- CHECKOUT_BUTTON --->
-                    <div id="ch_button" class="text-center" style="margin-top: 30px"><img
+                    <div id="ch_button" class="text-center" style="margin-top: 30px; cursor: pointer"><img
                             src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-pill-paypal-26px.png"
                             alt="PayPal"></div>
                 </li>
@@ -222,6 +226,9 @@
     paymentSourcesWidget.setLimit(20);
     paymentSourcesWidget.setRefId('test_ref_id');
     paymentSourcesWidget.setEnv('sandbox');
+    paymentSourcesWidget.setStyles({
+        background_color: 'rgb(255,255,255)'
+    });
     paymentSourcesWidget.load();
 </script>
 
@@ -234,16 +241,18 @@
 <script>
     // Config for card
     var cardAccount = new paydock.Configuration('59a40161de3dcf10a444e872', 'card');
-    cardAccount.setFormFields(['last_name']);
 
     // Config for bank account
     var bankAccount = new paydock.Configuration('59a40161de3dcf10a444e872', 'bank_account');
-    bankAccount.setFormFields(['last_name', 'account_bsb']);
+    bankAccount.setFormFields(['account_bsb']);
 
     // init
     var formWidget = new paydock.HtmlMultiWidget('#multi_widget', 'c661a1f03c6a21ddf13d1ad95b10873205a47758', [cardAccount, bankAccount]);
     formWidget.setEnv('sandbox');
     formWidget.setHiddenElements(['tabs', 'submit_button']);
+    formWidget.setStyles({
+        background_color: 'rgb(255,255,255)'
+    });
     formWidget.load();
 </script>
 
