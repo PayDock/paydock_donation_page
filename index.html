@@ -39,7 +39,9 @@
         .price-item-mobile {
             float: left;
             width: 50%!important;
-            height: 100%!important;
+            height: 80%!important;
+            margin-top: 5%;
+            margin-bottom: 5%;
         }
 
         .price-item-text {
@@ -69,7 +71,7 @@
         }
 
         .thumbnail-mobile {
-            height: 32%;
+            height: 30%;
         }
 
         .submit-button {
@@ -389,7 +391,7 @@
 ======================
 -->
 <script>
-    $(".prices-list .price-item").on("click", function (event) {
+    $(".prices-list .price-item, .price-item-mobile").on("click", function (event) {
         event.preventDefault();
         var amount = $(this).data('amount') || '';
         state.amount = amount;
@@ -407,7 +409,6 @@
                 updateButtonText(paymentSourcesWidget.meta);
                 break;
         }
-
     });
 </script>
 
